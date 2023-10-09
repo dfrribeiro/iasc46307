@@ -10,7 +10,7 @@ class RedeNeuronal:
     def __init__(self):
         self.camadas = []
 
-    def juntar_camada(self, camada):
+    def juntar(self, camada):
         """
         Junta uma camada à rede neural.
 
@@ -68,7 +68,7 @@ class RedeNeuronal:
 
         Args:
             entradas: Os dados de entrada da rede neuronal.
-        
+
         Retorna:
             Saídas da rede neuronal, caso queiram ser utilizadas para outros fins.
 

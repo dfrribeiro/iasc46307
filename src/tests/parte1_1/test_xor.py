@@ -28,7 +28,7 @@ n_outputs = 1
 inputs = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])  # shape: (N, input_shape)
 labels = np.array([[0], [1], [1], [0]])  # shape: (N, output_shape)
 
-# Estas linhas definem os valores de inicialização dos pesos e pendores
+# Valores de inicialização dos pesos e pendores
 # na camada escondida.
 #
 # * weights: uma matriz com os pesos das ligações entre neurónios
@@ -36,12 +36,17 @@ labels = np.array([[0], [1], [1], [0]])  # shape: (N, output_shape)
 # - cada coluna representa um neurónio na camada escondida
 # * biases: um vetor com os pendores dos neurónios
 # - cada elemento representa um neurónio na camada escondida
-# num caso habitual os valores costumam ser inicializados aleatoriamente,
-# baseados numa distribuição
+# Num caso habitual os valores costumam ser inicializados aleatoriamente,
+# baseados numa distribuição.
+# Neste caso, os pesos são definidos com base nas fronteiras de decisão
+# ótimas para resolver o problema XOR.
+# Definem os parâmetros de duas (uma para cada entrada) retas para cada neurónio na
+# camada escondida:
+# Os pesos são o declive das retas, e os pendores são o ponto de interceção
 weights = np.array([[1, -1], [-1, 1]])  # shape: (input_shape, hidden_shape)
 biases = np.array([-0.5, -0.5])  # shape: (hidden_shape, )
 
-# Estas linhas definem os valores de inicialização dos pesos e pendores
+# Valores de inicialização dos pesos e pendores
 # na camada de saída.
 #
 # * output_weights: uma matriz com os pesos das ligações entre neurónios
@@ -49,6 +54,7 @@ biases = np.array([-0.5, -0.5])  # shape: (hidden_shape, )
 # - cada coluna representa um neurónio na camada de saída
 # * output_bias: um vetor com os pendores dos neurónios
 # - cada elemento representa um neurónio na camada de saída
+# Para o neurónio de saída, duas retas são combinadas com as saídas da camada escondida.
 output_weights = np.array([[1], [1]])  # shape: (hidden_shape, output_shape)
 output_bias = -0.5  # shape: (output_shape, )
 

@@ -88,7 +88,10 @@ python ./src/tests/parte1_1/xor.py
 
 **Contexto**: Estudo de redes neuronais artificiais
 
-**Objetivo**: Implementação de uma rede neuronal multicamada com capacidade de aprendizagem usando a plataforma Keras, com estudo do operador XOR considerando diversos aspetos.
+**Objetivo**: Implementação de uma rede neuronal multicamada com capacidade de aprendizagem usando a plataforma Keras, com estudo do operador XOR considerando diversos aspetos:
+- Efeito da taxa de aprendizagem
+- Efeito da introdução de um termo de momento
+- Efeito da apresentação das amostras de treino com ordem fixa ou aleatória
 
 **Requisitos**:
 - A rede deve ser representada com base numa classe designada RedeNeuronal
@@ -111,6 +114,11 @@ python ./src/tests/parte1_1/xor.py
 - A rede deve ser representada com base numa classe designada RedeNeuronal
 - A implementação deve ser realizada na linguagem Python
 - A implementação deve ser realizada de acordo com o estudado nas aulas
+
+**Alterações**:
+- Melhoria dos comentários para a parte 1.3
+- Combinação dos testes de efeitos de parâmetros, melhor modularização do código
+- Adição de gráficos para os testes de efeitos de parâmetros
 
 ## [v1.5] - 20 de outubro de 2023
 

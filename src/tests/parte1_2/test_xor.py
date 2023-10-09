@@ -10,7 +10,9 @@ rede = RedeNeuronal()
 
 ativacao_degrau = Degrau(limiar=0)
 camada_entrada = CamadaDensa(dim_entrada=0, dim_saida=2)
-camada_escondida = CamadaDensa(dim_entrada=2, dim_saida=2, funcao_ativacao=ativacao_degrau)
+camada_escondida = CamadaDensa(
+    dim_entrada=2, dim_saida=2, funcao_ativacao=ativacao_degrau
+)
 camada_saida = CamadaDensa(dim_entrada=2, dim_saida=1, funcao_ativacao=ativacao_degrau)
 
 # Definição dos pesos e pendores das camadas
@@ -25,9 +27,9 @@ pendor_saida = np.array([-0.5])
 # camada_saida.atualizar_pendores(pendor_saida)
 
 # Construção da rede neuronal
-rede.juntar_camada(camada_entrada)
-rede.juntar_camada(camada_escondida)
-rede.juntar_camada(camada_saida)
+rede.juntar(camada_entrada)
+rede.juntar(camada_escondida)
+rede.juntar(camada_saida)
 
 rede.atualizar_parametros(
     [(pesos_escondida, pendores_escondida), (pesos_saida, pendor_saida)]

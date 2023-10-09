@@ -5,9 +5,14 @@ class CamadaDensa:
     """
     Representa uma camada densa de uma rede neuronal.
 
+    Uma camada densa é definida por um conjunto de neurónios em que todos têm
+    ligações de entrada para todos os neurónios da camada anterior e
+    ligações de saída para todos os neurónios da camada seguinte.
+
     Parâmetros:
-        dim_entrada: Dimensão de entrada da camada.
-        dim_saida: Dimensão de saída da camada.
+        dim_entrada: Dimensão de entrada da camada - quantidade de ligações que cada
+        neurónio vai ter para a camada anterior
+        dim_saida: Dimensão de saída da camada - quantidade de neurónios na camada
         funcao_ativacao: Função de ativação da camada.
         pesos: Pesos da camada, inicializados com uma distribuição normal.
         pendores: Pendores da camada, inicializados com uma distribuição normal.
@@ -80,7 +85,7 @@ class CamadaDensa:
 
         y = np.dot(entradas, self.__pesos) + self.__pendores
         return self.__funcao_ativacao.aplicar(y)
-    
+
     def __str__(self):
         return f"""CamadaDensa(
             dim_entrada={self.dim_entrada},
@@ -89,6 +94,7 @@ class CamadaDensa:
             pesos={self.pesos},
             pendores={self.pendores})"""
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     camada = CamadaDensa(2, 2)
     print(camada)

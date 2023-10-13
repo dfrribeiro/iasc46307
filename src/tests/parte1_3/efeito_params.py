@@ -4,47 +4,54 @@ from keras.layers import Input, Dense
 from lib.rede_neuronal_keras import RedeNeuronal
 import matplotlib.pyplot as plt
 
-
 # O objetivo deste código é avaliar o efeito de diferentes hiperparâmetros no treino de
 # uma rede neuronal perceptrão multicamada para resolver o problema XOR.
 
+# Os hiperparâmetros a testar são:
+# - Taxa de aprendizagem
+#   - Valores: 0.001, 0.01, 0.1, 0.5, 1
+#   A taxa de aprendizagem controla a rapidez com que os pesos são atualizados.
+#   No contexto da descida de gradiente, a taxa de aprendizagem é o tamanho do passo
+# que é dado na direção do gradiente.
+#   Uma taxa de aprendizagem muito pequena pode levar a um treino muito lento, enquanto
+# que uma taxa de aprendizagem muito grande pode levar a oscilações no erro que podem
+# impedir a convergência.
 
-# O código segue os seguintes passos:
-#
-# 1. Define os dados de treino XOR.
-# 2. Define a arquitetura da rede neural.
-# 3.
-# 4. Analisa os resultados do experimento e identifica os melhores valores dos
-# hiperparâmetros.
+# - Termo de momento
+#   - Valores: 0, 0.5, 0.9, 0.99
+#   O termo de momento controla a influência dos pesos anteriores na atualização dos
+# pesos. Um termo de momento de 0 significa que apenas o gradiente atual é considerado
+# na atualização dos pesos, enquanto que um termo de momento de 1 significa que apenas
+# os pesos anteriores são considerados.
+#   Um termo de momento muito pequeno pode levar a um treino muito lento, enquanto que
+# um termo de momento muito grande pode levar a oscilações no erro que podem impedir a
+# convergência.
 
-# **Explicação dos hiperparâmetros**
-#
-# * **Taxa de aprendizagem** é um parâmetro que controla a magnitude dos ajustes de peso
-# durante o treino. Uma taxa de aprendizagem muito alta pode levar a oscilações no erro,
-# enquanto uma taxa de aprendizagem muito baixa pode levar a um treino lento.
-# * **Momento** é um parâmetro que pode ajudar a acelerar o treino da rede neural.
-# O momento utiliza uma média ponderada dos ajustes de peso anteriores para calcular os
-# ajustes atuais.
-# * **Ordem de apresentação** é um parâmetro que controla a ordem em que os dados são
-# apresentados à rede neural durante o treino. A apresentação aleatória pode ajudar a
-# evitar que a rede neural fique presa em um mínimo local.
+# - Ordem de apresentação dos dados de treino
+#   - Valores: original (`shuffle=False`), aleatória (`shuffle=True`)
+#   A ordem de apresentação dos dados de treino pode ser original ou aleatória. No caso
+# de ser aleatória, os dados de treino são apresentados à rede neuronal numa ordem
+# aleatória a cada época. No caso de ser original, os dados de treino são apresentados
+# à rede neuronal na mesma ordem a cada época.
+#   A ordem de apresentação dos dados de treino pode ter um efeito no treino da rede
+# neuronal. No caso de ser aleatória, a rede neuronal pode aprender mais rapidamente
+# porque os dados de treino são apresentados de forma mais variada. No caso de ser
+# original, a rede neuronal pode aprender mais lentamente porque os dados de treino são
+# apresentados sempre na mesma ordem.
 
-# **Resultados**
-#
-# Os resultados do experimento mostram que os melhores valores dos hiperparâmetros são
-# taxa de aprendizagem de 0,001, momento de 0.9 e ordem de apresentação aleatória.
-# Com esses valores, a rede neural é capaz de atingir um erro médio de 0,02.
+# O número de neurónios na camada escondida é fixo, e o número de saídas também se
+# mantém. A complexidade da rede poderia ser aumentada, para obter melhores resultados.
+# A procura no espaço de estados é muito exigente com 2 neurónios na camada escondida:
+# muitos ótimos locais - com mais neurónios, seria mais fácil encontrar um ótimo global.
+# Ao receber ruído, a rede perde a capacidade de generalização,
+# e ocorre sobreparametrização.
 
-# **Melhorias**
-#
-# O código pode ser melhorado da seguinte forma:
-#
-# * **Adicionar mais repetições do experimento** para aumentar a precisão dos
-# resultados.
-# * **Testar outros hiperparâmetros**, como a arquitetura da rede neural e a função de
-# ativação.
-# * **Implementar um algoritmo de validação cruzada estratificada** para garantir que os
-# resultados sejam representativos do conjunto de dados de teste.
+# Note-se que 2 neurónios na camada escondida é o mínimo suficiente mas ineficiente
+# para resolver o problema XOR. Aumentando o número de neurónios, a rede neuronal pode
+# aprender mais rapidamente e com menos erros.
+# Semelhantemente, a rede neuronal pode aprender mais rapidamente e com menos erros
+# se o número de camadas escondidas for aumentado, sendo em geral mais eficiente do que
+# aumentar o número de neurónios numa única camada escondida.
 
 
 # Definição da arquitetura da rede (os pesos ainda não são inicializados a este ponto)
@@ -87,7 +94,8 @@ def colecionar_erros(
     print(linha_cabeca)
     print("-" * len(linha_cabeca))
 
-    # Para cada com combinação de hiperparâmetros, treinar a rede e guardar os resultados
+    # Para cada com combinação de hiperparâmetros,
+    # treinar a rede e guardar os resultados
     for eta, alpha, chi, rep in matriz_param:
         rede = criar_modelo()
 
@@ -123,6 +131,8 @@ def mostrar_efeito_param(
     erros, eixo, valores, nome, titulo, ficheiro, repr_erros_por_graf=20
 ):
     """
+    Expõe o efeito de um parâmetro, definido pelo eixo e uma gama de valores,
+    no treino da rede neuronal.
 
     Parâmetros:
         erros: array shape (num_epocas,)
@@ -172,8 +182,8 @@ if __name__ == "__main__":
     # Hiperparâmetros de teste
     # Uma taxa de aprendizagem acima de 1 significa que os pesos são atualizados com
     # valores superiores aos valores atuais, o que pode levar a oscilações no erro.
-    valores_taxa_aprend = [0.001, 0.01, 0.1, 0.5, 1]
-    valores_momento = [0, 0.5, 0.9, 0.99]
+    valores_taxa_aprend = list(reversed([0.001, 0.01, 0.1, 0.5, 1]))
+    valores_momento = list(reversed([0, 0.5, 0.9, 0.99]))
     valores_ordem = [False, True]
 
     # Matriz para guardar os resultados (taxa_aprend, momento, ordem, repetição, época)
@@ -261,7 +271,7 @@ if __name__ == "__main__":
         """
     )
 
-""" Resultado
+""" Resultado no. 1
 Repetição | Taxa Apr. | Momento   | Ordem    
 ---------------------------------------------
    1/10   | 0.001     | 0         | original 
@@ -276,3 +286,21 @@ Repetição | Taxa Apr. | Momento   | Ordem
         Melhor combinação: (0.5, 0.99, False)
         (Erro médio: 0.0416666782369918)
 """
+
+"""Resultado no. 2
+Repetição | Taxa Apr. | Momento   | Ordem    
+---------------------------------------------
+   1/10   | 1         | 0.99      | original 
+    ...
+  10/10   | 0.001     | 0         | aleatória
+
+        Melhor = Menor mediana de erros finais
+        Melhor taxa de aprendizagem: 1 (Erro médio: 0.0495478496972976)
+        Melhor momento: 0.99 (Erro médio: 0.06559981622563255)
+        Melhor ordem: True (Erro médio: 0.09165950857052912)
+
+        Melhor combinação: (0.5, 0.99, True)
+        (Erro médio: 0.03750001044935048)
+"""
+
+# TODO: Explorar custo temporal

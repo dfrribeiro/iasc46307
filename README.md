@@ -120,30 +120,6 @@ python ./src/tests/parte1_1/xor.py
 - Combinação dos testes de efeitos de parâmetros, melhor modularização do código
 - Adição de gráficos para os testes de efeitos de parâmetros
 
-## [v1.5] - 20 de outubro de 2023
-
-## [v1.6] - 27 de outubro de 2023
-
-## [v1.6] - 27 de outubro de 2023
-
-## [v1.7] - 27 de outubro de 2023
-
-## [v1.8] - 3 de novembro de 2023
-
-## [v1.9] - 10 de novembro de 2023
-
-## [v1.10] - 17 de novembro de 2023
-
-## [v1.11] - 24 de novembro de 2023
-
-## [v1.12] - 1 de dezembro de 2023
-
-## [v1.13] - 8 de dezembro de 2023
-
-### [v1.14] - 15 de dezembro de 2023
-
-- Entrega do relatório final
-
 ## Bibliografia
 
 - S. Russell, P. Norvig - [Artificial Intelligence: A Modern Approach](https://aima.cs.berkeley.edu/global-index.html), 4th Global Edition, Prentice Hall, 2022

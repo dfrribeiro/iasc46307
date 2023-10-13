@@ -49,3 +49,6 @@ dados_entrada = np.array(
 )
 
 rede.imprimir_previsao(dados_entrada)
+# Resultado:
+# [0] => [1.]
+# [1] => [0.]

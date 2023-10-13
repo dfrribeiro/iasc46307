@@ -43,3 +43,8 @@ rede.atualizar_parametros(
 dados_entrada = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 
 rede.imprimir_previsao(dados_entrada)
+# Resultado:
+# [0 0] => [0.]
+# [0 1] => [0.]
+# [1 0] => [0.]
+# [1 1] => [1.]

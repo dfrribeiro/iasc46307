@@ -75,7 +75,7 @@ class RedeNeuronal:
         Exemplo:
         >>> rede_neuronal = RedeNeuronal()
         >>> entradas = [[0.1,], [0.2,], [0.3,]]
-        >>> rede_neural.imprimir_previsao(entradas)
+        >>> rede_neuronal.imprimir_previsao(entradas)
         Previsão:
         0.1 => 0.5
         0.2 => 0.6

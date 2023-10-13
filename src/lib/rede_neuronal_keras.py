@@ -46,6 +46,20 @@ class RedeNeuronal:
     ):
         """
         Treina a rede neuronal utilizando o algoritmo de retropropagação.
+        A função de perda utilizada é o erro quadrático médio.
+        Para problemas de aprendizagem supervisionada, como é o caso, o erro quadrático
+        médio é utilizado para medir a diferença entre as saídas desejadas e as saídas
+        da rede neuronal.
+
+        O otimizador utilizado é a descida de gradiente estocástico (SGD).
+        A descida de gradiente estocástico é uma estratégia de otimização iterativa
+        à procura de um mínimo local da função de perda. A cada iteração, o algoritmo
+        atualiza os parâmetros da rede neuronal de acordo com a direção do gradiente.
+        A taxa de aprendizagem controla o tamanho do passo dado em cada iteração.
+        O momento controla a influência de iterações anteriores na direção do gradiente.
+        A variação estocástica do gradiente é utilizada para evitar que o algoritmo
+        fique preso em mínimos locais, inicializando cada iteração a partir de um ponto
+        diferente.
 
         Parâmetros:
             entradas: Entradas da rede neuronal.

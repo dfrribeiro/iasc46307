@@ -8,7 +8,8 @@ if __name__ == "__main__":
     ambiente.mostrar()
 
     # Definição do mecanismo de aprendizagem
-    mec_aprend = MecanismoAprendizagem()
+    acoes = None  # TODO
+    mec_aprend = MecanismoAprendizagem(acoes)
 
     # Definição do agente
     agente = Agente(ambiente, mec_aprend)

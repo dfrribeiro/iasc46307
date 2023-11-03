@@ -18,11 +18,11 @@ class Agente:
     Para aprender, o agente tem um mecanismo de aprendizagem.
     """
 
-    def __init__(self, ambiente, mecanismo):
+    def __init__(self, ambiente, mecanismo, recompensa_max=100.0):
         self._mecanismo = mecanismo
-        self._estado_terminal = False
         self._estado_atual = None
         self._acao_executada = None
+        self._recompensa_max = recompensa_max
 
         self._associar_ambiente(ambiente)
 
@@ -58,16 +58,16 @@ class Agente:
     def estado_terminal(self):
         return self._ambiente._obter_elemento(self._estado_atual) == Elemento.ALVO
 
-    def _gerar_reforco(self, percepcao, VALOR_MAX=1, CUSTO_MOV=0.1):
+    def _gerar_reforco(self, percepcao, CUSTO_MOV=0.1):
         """
         Define o resultado no domínio do problema.
         """
 
         if percepcao.elemento == Elemento.ALVO:
-            return VALOR_MAX
+            return self._recompensa_max
         elif percepcao.colisao:
-            return -VALOR_MAX
-        return CUSTO_MOV
+            return -self._recompensa_max
+        return -CUSTO_MOV
 
     def _atuar(self, acao):
         """
@@ -80,7 +80,7 @@ class Agente:
 
         self._acao_executada = acao
 
-    def executar(self):
+    def _passo_episodio(self):
         """
         Um passo do ciclo de aprendizagem do agente.
         """
@@ -90,25 +90,37 @@ class Agente:
         self._atuar(acao)
         self._ambiente.mostrar()
 
-    def iniciar_episodio(self):
+    def _fim_episodio(self):
+        return self._ambiente._obter_elemento(self._estado_atual) == Elemento.ALVO
+
+    def executar(self, num_episodios=None):
         """
         Um episodio de raciocinio no ambiente é um ciclo de aprendizagem
         que termina quando o agente atinge o estado objetivo.
+        Retorna uma lista com o número de passos que o agente
+        demorou a atingir o objetivo em cada episódio.
+        Se num_episodios for None, executa até o utilizador interromper.
         """
+        num_passos_episodio = []
+        episodio = 0
         try:
-            while True:  # cancelado por CTRL+C/SIGINT
-                estado = self._ambiente.reiniciar()
+            while num_episodios is None or episodio < num_episodios:
+                episodio += 1
+                self._estado_atual = self._ambiente.reiniciar()
 
-                # TODO: Métricas
-                recompensa_total = 0
-                step = 0
+                num_passos = 0
+                while not self._fim_episodio():
+                    num_passos += 1
+                    self._passo_episodio()
 
-                while not self.estado_terminal:
-                    step += 1
-                    self.executar()
+                # Registar o número de passos que o agente demorou a atingir o objetivo
+                num_passos_episodio.append(num_passos)
         except KeyboardInterrupt:
-            # TODO save/log
-            print("Episódio terminado por interrupção do utilizador.")
+            print(
+                f"Execução interrompida pelo utilizador.\
+                \nNº de episódios executados: {episodio}"
+            )
+        return num_passos_episodio
 
 
 # Diagrama de sequência:

@@ -1,6 +1,6 @@
 import numpy as np
 from keras.layers import Dense, Input
-from lib.rede_neuronal_keras import RedeNeuronal
+from lib.rna.rede_neuronal_keras import RedeNeuronal
 import matplotlib.pyplot as plt
 
 print("-- PROBLEMA XOR -- (cod. binária)")

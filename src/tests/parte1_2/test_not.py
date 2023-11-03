@@ -1,7 +1,7 @@
 import numpy as np
-from lib.ativacao import Degrau
-from lib.camada import CamadaDensa
-from lib.rede_neuronal import RedeNeuronal
+from lib.rna.ativacao import Degrau
+from lib.rna.camada import CamadaDensa
+from lib.rna.rede_neuronal import RedeNeuronal
 
 print("-- PROBLEMA NOT -- (cod. binária)")
 

@@ -120,6 +120,44 @@ python ./src/tests/parte1_1/xor.py
 - Combinação dos testes de efeitos de parâmetros, melhor modularização do código
 - Adição de gráficos para os testes de efeitos de parâmetros
 
+## [v2.0] - 20 de outubro de 2023 a 24 de novembro de 2023
+
+**Contexto**: Estudo de aprendizagem por reforço
+
+**Objectivo**: Implementação de um agente para aprendizagem por reforço através da interacção com um ambiente
+
+**Requisitos**:
+- A implementação deve ser realizada na linguagem Python
+- A implementação deve ser realizada de acordo com o estudado nas aulas
+- Deve ser utilizado o módulo de simulação de ambiente disponibilizado
+
+**Alterações**:
+- Reorganização dos módulos Python em grupos separados por partes
+
+## [v2.1] - 20 de outubro de 2023
+
+Implementação da classe que representa o agente com base no módulo de simulação de ambiente disponibilizado
+
+## [v2.2] - 27 de outubro de 2023
+
+Implementação dos mecanismos de memória de aprendizagem e de selecção de acção
+
+## [v2.3] - 3 de novembro de 2023
+
+Implementação do mecanismo de aprendizagem Q-Learning
+
+## [v2.4] - 10 de novembro de 2023
+
+Teste do mecanismo de aprendizagem Q-Learning com selecção de acção com valores iniciais optimistas
+
+## [v2.5] - 17 de novembro de 2023
+
+Implementação do mecanismo de aprendizagem Q-Learning com memória episódica
+
+## [v2.6] - 24 de novembro de 2023
+
+Teste do mecanismo de aprendizagem Q-Learning com memória episódica
+
 ## Bibliografia
 
 - S. Russell, P. Norvig - [Artificial Intelligence: A Modern Approach](https://aima.cs.berkeley.edu/global-index.html), 4th Global Edition, Prentice Hall, 2022

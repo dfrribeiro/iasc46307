@@ -1,7 +1,7 @@
 import itertools
 import numpy as np
 from keras.layers import Input, Dense
-from lib.rede_neuronal_keras import RedeNeuronal
+from lib.rna.rede_neuronal_keras import RedeNeuronal
 import matplotlib.pyplot as plt
 
 # O objetivo deste código é avaliar o efeito de diferentes hiperparâmetros no treino de

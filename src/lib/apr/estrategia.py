@@ -19,8 +19,10 @@ class EpsilonGreedy(EstrategiaSelecaoAcao):
     A estratégia de seleção de ação Epsilon-Greedy determina que o
     agente escolhe uma ação aleatória, ignorando o seu valor aprendido,
     numa percentagem epsilon das suas seleções.
+
     A exploração é importante para obter melhorias a uma solução inicial que
     o agente tenha obtido.
+
     Um valor de epsilon de 1 resulta num agente irracional,
     que escolhe as ações aleatoriamente.
     """

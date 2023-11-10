@@ -20,9 +20,11 @@
 ## Instalação e Execução
 
 ### Pré-requisitos
+
 - Python >=3.6 instalado [(instruções)](https://www.python.org/downloads/).
 
 ### Instalação
+
 ```shell
 # Copiar o repositório para local
 git clone https://github.com/dfrribeiro/iasc46307.git
@@ -69,6 +71,7 @@ python ./src/tests/parte1_1/xor.py
 **Objetivo**: Implementação da função XOR com uma rede neuronal do tipo perceptrão
 
 **Requisitos**:
+
 - A rede deve ser representada com base em matrizes
 - A implementação deve ser realizada na linguagem Python sem utilização de classes
 - A implementação deve ser realizada de acordo com o estudado nas aulas
@@ -80,6 +83,7 @@ python ./src/tests/parte1_1/xor.py
 **Objetivo**: Implementação de uma rede neuronal multicamada e testes dos operadores booleanos OR, AND e NOT, bem como do operador XOR
 
 **Requisitos**:
+
 - A rede deve ser representada com base numa classe designada RedeNeuronal
 - A implementação deve ser realizada na linguagem Python
 - A implementação deve ser realizada de acordo com o estudado nas aulas
@@ -89,16 +93,19 @@ python ./src/tests/parte1_1/xor.py
 **Contexto**: Estudo de redes neuronais artificiais
 
 **Objetivo**: Implementação de uma rede neuronal multicamada com capacidade de aprendizagem usando a plataforma Keras, com estudo do operador XOR considerando diversos aspetos:
+
 - Efeito da taxa de aprendizagem
 - Efeito da introdução de um termo de momento
 - Efeito da apresentação das amostras de treino com ordem fixa ou aleatória
 
 **Requisitos**:
+
 - A rede deve ser representada com base numa classe designada RedeNeuronal
 - A implementação deve ser realizada na linguagem Python
 - A implementação deve ser realizada de acordo com o estudado nas aulas
 
 ***Alterações***:
+
 - Melhor organização dos módulos
 - Adicionado ficheiro README com instruções de instalação e execução
 - Correção de configuração de ambiente Python
@@ -111,11 +118,13 @@ python ./src/tests/parte1_1/xor.py
 **Objectivo**: Resolução do problema de classificação dos padrões A (caixa) e B (cruz)
 
 **Requisitos**:
+
 - A rede deve ser representada com base numa classe designada RedeNeuronal
 - A implementação deve ser realizada na linguagem Python
 - A implementação deve ser realizada de acordo com o estudado nas aulas
 
 **Alterações**:
+
 - Melhoria dos comentários para a parte 1.3
 - Combinação dos testes de efeitos de parâmetros, melhor modularização do código
 - Adição de gráficos para os testes de efeitos de parâmetros
@@ -127,11 +136,13 @@ python ./src/tests/parte1_1/xor.py
 **Objectivo**: Implementação de um agente para aprendizagem por reforço através da interacção com um ambiente
 
 **Requisitos**:
+
 - A implementação deve ser realizada na linguagem Python
 - A implementação deve ser realizada de acordo com o estudado nas aulas
 - Deve ser utilizado o módulo de simulação de ambiente disponibilizado
 
 **Alterações**:
+
 - Reorganização dos módulos Python em grupos separados por partes
 
 ## [v2.1] - 20 de outubro de 2023

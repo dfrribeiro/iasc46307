@@ -29,7 +29,7 @@ class EpsilonGreedy(EstrategiaSelecaoAcao):
 
     def __init__(self, memoria, acoes, epsilon, seed=None):
         super().__init__(memoria)
-        self.__acoes = acoes
+        self.__acoes = list(acoes)
         self.__epsilon = epsilon
         random.seed(seed)
 

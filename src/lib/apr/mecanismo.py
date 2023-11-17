@@ -33,11 +33,11 @@ class MecanismoAprendizagem(Aprendizagem):
     2. Atualizar a memória de aprendizagem com o resultado da ação
     """
 
-    def __init__(self, acoes, alpha=0.5, gamma=0.9, epsilon=0.1):
+    def __init__(self, acoes, memoria, sel_acao, metodo):
         self.__acoes = acoes
-        self.__memoria = MemoriaEsparsa()
-        self.__sel_acao = EpsilonGreedy(self.__memoria, self.__acoes, epsilon)
-        self.__metodo = QLearning(self.__memoria, self.__sel_acao, alpha, gamma)
+        self.__memoria = memoria
+        self.__sel_acao = sel_acao
+        self.__metodo = metodo
 
     def aprender(self, estado, acao, reforco, estado_seguinte, acao_seguinte=None):
         """

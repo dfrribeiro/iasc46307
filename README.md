@@ -54,6 +54,12 @@ $env:PYTHONPATH += ";$PWD/src"
 export PYTHONPATH=$PYTHONPATH:$PWD/src
 ```
 
+### Distribuição
+
+```shell
+git archive --format zip --output ../iasc46307.zip master
+```
+
 ### Execução
 
 Por exemplo, para executar o programa da parte 1.1:

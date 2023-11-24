@@ -16,6 +16,10 @@ DEFAULT_CONFIG = {
 
 
 def definir_agente(config):
+    """
+    Altera a configuração por omissão do agente com base na configuração dada,
+    de forma a produzir uma configuração completa.
+    """
     base = DEFAULT_CONFIG
     base.update(config)
     return base
@@ -33,7 +37,7 @@ def construir_agente(ambiente, acoes, config):
         config["mec_aprend"],
     )
 
-    # Definição do agente (inicialização de dependências)
+    # Definição do agente (inicialização e injeção de dependências)
     # + com configuração por omissão
     memoria = m["class"](**m["args"])
     sel_acao = s["class"](memoria, acoes, **s["args"])
@@ -53,7 +57,7 @@ def mostrar_agente(agente):
 ({pretty_args(agente['memoria']['args'])})"
     )
     print(
-        f"| Seleção de ação: {agente['sel_acao']['class'].__name__}\
+        f"| Estratégia de seleção de ação: {agente['sel_acao']['class'].__name__}\
 ({pretty_args(agente['sel_acao']['args'])})"
     )
     print(
@@ -70,7 +74,6 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import time
 
-    NUM_AMBIENTE = 2
     MAX_EPISODIOS = 50
 
     # Definição declarativa dos agentes
@@ -94,11 +97,16 @@ if __name__ == "__main__":
             "label": "Q-Learning otimista",
             "memoria": {
                 "class": MemoriaEsparsa,
-                "args": {"valor_por_omissao": 10},
+                "args": {"valor_por_omissao": 1.0},
                 # Qualquer valor acima de zero é otimista, visto que o agente não
-                # perde nada por explorar. O valor 10 é arbitrário.
+                # acumula valor por explorar (custo mov. = 0). O valor 10 é arbitrário.
+                # Desde que o valor seja maior que qualquer reforço possível à exceção do alvo.
             },
         },
+        # O efeito esperado é que o agente otimista aprenda mais depressa, visto que
+        # explora o ambiente sistematicamente. No entanto, o agente otimista pode ter
+        # dificuldade em aprender a política ótima, caso a sua política inicial seja
+        # muito diferente da ótima.
     ]
 
     acoes = list(Accao)
@@ -115,7 +123,12 @@ if __name__ == "__main__":
             agente = construir_agente(ambiente, acoes, def_agente)
 
             # Gráfico dos resultados
-            plt.plot(agente.executar(MAX_EPISODIOS), ".--", label=config["label"])
+            inicio = time.time()
+            passos = agente.executar(MAX_EPISODIOS)
+            fim = time.time()
+            print(f"Tempo de execução: {fim - inicio:.2f}s")
+
+            plt.plot(passos, ".--", label=config["label"])
 
             # Mostrar política (Q) aprendida
             # s: argmax_a Q(s, a) for s in estados

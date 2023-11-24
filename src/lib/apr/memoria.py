@@ -32,9 +32,11 @@ class MemoriaEsparsa(MemoriaAprendizagem):
     def __init__(self, valor_por_omissao=0.0):
         self.__entradas = MemoriaAssociativa()
         self.__valor_por_omissao = valor_por_omissao
+        self.__estados = set()
 
     def atualizar(self, estado, acao, valor):
         self.__entradas[estado, acao] = valor
+        self.__estados.add(estado)
 
     def obter_valor(self, estado, acao):
         return self.__entradas.get((estado, acao), self.__valor_por_omissao)
@@ -52,6 +54,10 @@ class MemoriaEsparsa(MemoriaAprendizagem):
         linhas += [f"(?, ?): {self.__valor_por_omissao}"]
 
         return "\n".join(linhas)
+
+    @property
+    def estados(self):
+        return self.__estados
 
 
 class MemoriaAssociativa(dict):

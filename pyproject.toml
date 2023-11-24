@@ -17,8 +17,7 @@ classifiers = [
 dependencies = [
     "numpy",
     "tensorflow",
-    "matplotlib",
-    "seaborn"
+    "matplotlib"
 ]
 
 [project.urls]

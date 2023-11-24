@@ -1,8 +1,3 @@
-from lib.apr.estrategia import EpsilonGreedy
-from lib.apr.memoria import MemoriaEsparsa
-from lib.apr.metodo import QLearning
-
-
 class Aprendizagem:
     """
     Interface para os métodos de aprendizagem.
@@ -65,3 +60,12 @@ class MecanismoAprendizagem(Aprendizagem):
         """
         # Delegação à estratégia de seleção de ação
         return self.__sel_acao.selecionar_acao(estado)
+
+    def gerar_politica(self):
+        """
+        Gera uma política a partir da memória de aprendizagem.
+        """
+        return {
+            estado: self.__sel_acao.aproveitar(estado)
+            for estado in self.__memoria.estados
+        }

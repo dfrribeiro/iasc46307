@@ -7,69 +7,126 @@ from mod.ambiente.accao import Accao
 from lib.apr.agente import Agente
 from lib.apr.mecanismo import MecanismoAprendizagem
 
+DEFAULT_CONFIG = {
+    "memoria": {"class": MemoriaEsparsa, "args": {}},
+    "sel_acao": {"class": EpsilonGreedy, "args": {"epsilon": 0.1}},
+    "metodo": {"class": QLearning, "args": {"alpha": 0.5, "gamma": 0.9}},
+    "mec_aprend": {"class": MecanismoAprendizagem, "args": {}},
+}
 
-class TesteAprendRef:
+
+def definir_agente(config):
+    base = DEFAULT_CONFIG
+    base.update(config)
+    return base
+
+
+def construir_agente(ambiente, acoes, config):
     """
-    Classe que modulariza o teste de aprendizagem por reforço.
+    Constrói um agente com base na configuração dada.
+    Assume que a configuração provém de `definir_agente`.
     """
+    m, s, t, c = (
+        config["memoria"],
+        config["sel_acao"],
+        config["metodo"],
+        config["mec_aprend"],
+    )
 
-    # TODO: extrair agente para permitir comparar qualquer agente (separar escopos)
-    def testar(self, num_ambiente, num_episodios):
-        """
-        Retorna o número de passos por episódio.
-        """
+    # Definição do agente (inicialização de dependências)
+    # + com configuração por omissão
+    memoria = m["class"](**m["args"])
+    sel_acao = s["class"](memoria, acoes, **s["args"])
+    metodo = t["class"](memoria, sel_acao, **t["args"])
+    mec_aprend = c["class"](acoes, memoria, sel_acao, metodo, **c["args"])
 
-        # Definição do ambiente
-        ambiente_q = Ambiente(num_ambiente)
-        ambiente_qme = Ambiente(num_ambiente)
+    return Agente(ambiente, mec_aprend)  # reforço max = 100
 
-        # Definição do agente para os dois métodos de aprendizagem
-        acoes_q = list(Accao)
-        memoria_q = MemoriaEsparsa()
-        sel_acao_q = EpsilonGreedy(memoria_q, acoes_q, epsilon=0.1)
-        metodo_q = QLearning(memoria_q, sel_acao_q, alpha=0.5, gamma=0.9)
-        mec_aprend_q = MecanismoAprendizagem(acoes_q, memoria_q, sel_acao_q, metodo_q)
-        agente_q = Agente(ambiente_q, mec_aprend_q)
 
-        #
-        acoes_qme = list(Accao)
-        memoria_qme = MemoriaEsparsa()
-        sel_acao_qme = EpsilonGreedy(memoria_qme, acoes_qme, epsilon=0.1)
-        metodo_qme = QME(
-            memoria_qme,
-            sel_acao_qme,
-            alpha=0.5,
-            gamma=0.9,
-            num_sim=5,
-            dim_max=50,
-        )
-        mec_aprend_qme = MecanismoAprendizagem(
-            acoes_qme, memoria_qme, sel_acao_qme, metodo_qme
-        )
-        agente_qme = Agente(ambiente_qme, mec_aprend_qme)
+def mostrar_agente(agente):
+    def pretty_args(d):
+        return ", ".join(f"{k}={v}" for k, v in d.items()) if d.items() else ""
 
-        # Ciclo de aprendizagem do agente
-        return [agente_q.executar(num_episodios), agente_qme.executar(num_episodios)]
+    print(f"Agente: {agente['label']}")
+    print(
+        f"| Memória: {agente['memoria']['class'].__name__}\
+({pretty_args(agente['memoria']['args'])})"
+    )
+    print(
+        f"| Seleção de ação: {agente['sel_acao']['class'].__name__}\
+({pretty_args(agente['sel_acao']['args'])})"
+    )
+    print(
+        f"| Método de aprendizagem: {agente['metodo']['class'].__name__}\
+({pretty_args(agente['metodo']['args'])})"
+    )
+    print(
+        f"| Mecanismo de aprendizagem: {agente['mec_aprend']['class'].__name__}\
+({pretty_args(agente['mec_aprend']['args'])})\n"
+    )
 
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import time
 
-    NUM_AMBIENTE = 1
-    MAX_EPISODIOS = 100
+    NUM_AMBIENTE = 2
+    MAX_EPISODIOS = 50
 
-    teste = TesteAprendRef()
-    passos = teste.testar(NUM_AMBIENTE, MAX_EPISODIOS)
+    # Definição declarativa dos agentes
+    config_agentes = [
+        {
+            "label": "Q-Learning",
+        },
+        {
+            "label": "Q-Learning com Memória de Experiência",
+            "metodo": {
+                "class": QME,
+                "args": {
+                    "alpha": 0.5,
+                    "gamma": 0.9,  # TODO manter por omissão
+                    "num_sim": 5,
+                    "dim_max": 50,
+                },
+            },
+        },
+        {
+            "label": "Q-Learning otimista",
+            "memoria": {
+                "class": MemoriaEsparsa,
+                "args": {"valor_por_omissao": 10},
+                # Qualquer valor acima de zero é otimista, visto que o agente não
+                # perde nada por explorar. O valor 10 é arbitrário.
+            },
+        },
+    ]
 
-    # Gráfico dos resultados
-    plt.plot(passos[0], ".--", label="Q-Learning")
-    plt.plot(passos[1], ".--", label="Q-Learning com Memória de Experiência")
-    plt.title(f"Ambiente #{NUM_AMBIENTE}: Número de passos por episódio")
-    plt.xlabel("Episódio")
-    plt.ylabel("Passos")
-    plt.grid(True)
-    plt.legend()
-    now = time.strftime("%Y%m%d-%H%M%S")
-    plt.savefig(f"out/apr_{NUM_AMBIENTE}_{now}.png")
-    plt.show()
+    acoes = list(Accao)
+
+    for num_ambiente in range(1, 4):
+        ambiente = Ambiente(num_ambiente)
+
+        for i, config in enumerate(config_agentes):
+            # Definição do agente
+            config["label"] = config.get("label") or f"Agente #{i}"
+            def_agente = definir_agente(config)
+            mostrar_agente(def_agente)
+
+            agente = construir_agente(ambiente, acoes, def_agente)
+
+            # Gráfico dos resultados
+            plt.plot(agente.executar(MAX_EPISODIOS), ".--", label=config["label"])
+
+            # Mostrar política (Q) aprendida
+            # s: argmax_a Q(s, a) for s in estados
+            politica = agente._mecanismo.gerar_politica()
+            ambiente.mostrar_politica(politica)
+
+        plt.title(f"Ambiente #{num_ambiente}: Número de passos por episódio")
+        plt.xlabel("Episódio")
+        plt.ylabel("Passos")
+        plt.grid(True)
+        plt.legend()
+        now = time.strftime("%Y%m%d-%H%M%S")
+        plt.savefig(f"out/apr_{num_ambiente}_{now}.png")
+        plt.show()

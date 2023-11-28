@@ -19,14 +19,22 @@ class FrenteOnda:
         """
         V = {}
         frente = []
+
+        # Inicializa o valor dos estados objetivos e os adiciona à frente de onda
         for s in objetivos:
             V[s] = self.__valor_max
             frente.append(s)
 
         while frente:
+            # Remove o primeiro elemento da frente de onda
             s = frente.pop(0)
+
+            # Para cada estado adjacente, calcula o valor
             for sn in self.__adjacentes(modelo, s):
+                # Utiliza uma função de decaimento exponencial para propagar o valor
                 v = V[s] * self.__gamma ** modelo.distancia(s, sn)
+
+                # Se a onda tem maior intensidade, propaga o valor
                 if v > V.get(sn, float("-inf")):
                     V[sn] = v
                     frente.append(sn)

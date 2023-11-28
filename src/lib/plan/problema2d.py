@@ -31,8 +31,7 @@ class ModeloMundo2D(ModeloMundo):
         Retorna a transição de estado dado um estado e uma ação,
         None se existir uma colisão.
         """
-        prox_estado = Estado(estado.x + acao.dx, estado.y + acao.dy)
-        return prox_estado if self.__estado_valido(prox_estado) else None
+        return self.__simular_acao(estado, acao)
 
     def distancia(self, estado1, estado2):
         """
@@ -66,7 +65,8 @@ class ModeloMundo2D(ModeloMundo):
         """
         Simula a ação no estado dado e retorna o estado resultante.
         """
-        pass
+        prox_estado = Estado(estado.x + acao.dx, estado.y + acao.dy)
+        return prox_estado if self.__estado_valido(prox_estado) else None
 
     def __estado_valido(self, estado):
         """

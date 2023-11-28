@@ -135,7 +135,7 @@ python ./src/tests/parte1_1/xor.py
 - Combinação dos testes de efeitos de parâmetros, melhor modularização do código
 - Adição de gráficos para os testes de efeitos de parâmetros
 
-## [v2.0] - 20 de outubro de 2023 a 24 de novembro de 2023
+## [v2.x] - 20 de outubro de 2023 a 24 de novembro de 2023
 
 **Contexto**: Estudo de aprendizagem por reforço
 
@@ -175,7 +175,7 @@ Implementação do mecanismo de aprendizagem Q-Learning com memória episódica
 
 Teste do mecanismo de aprendizagem Q-Learning com memória episódica
 
-## [v3.0] - 28 de novembro de 2023 a 22 de dezembro de 2023
+## [v3.x] - 28 de novembro de 2023 a 22 de dezembro de 2023
 
 **Contexto:**: Estudo de métodos de raciocínio automático e de
 arquitectura de agentes deliberativos
@@ -186,6 +186,14 @@ planeamento com base no algoritmo Frente-de-Onda
 ## [v3.1] - 28 de novembro de 2023
 
 Modelo do mundo, Frente de onda
+
+## [v3.2] - 5 de dezembro de 2023
+
+...
+
+## [v3.3] - 15 de dezembro de 2023
+
+...
 
 ## Bibliografia
 

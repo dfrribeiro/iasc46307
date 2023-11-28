@@ -139,7 +139,7 @@ python ./src/tests/parte1_1/xor.py
 
 **Contexto**: Estudo de aprendizagem por reforço
 
-**Objectivo**: Implementação de um agente para aprendizagem por reforço através da interacção com um ambiente
+**Objetivo**: Implementação de um agente para aprendizagem por reforço através da interacção com um ambiente
 
 **Requisitos**:
 
@@ -174,6 +174,18 @@ Implementação do mecanismo de aprendizagem Q-Learning com memória episódica
 ## [v2.6] - 24 de novembro de 2023
 
 Teste do mecanismo de aprendizagem Q-Learning com memória episódica
+
+## [v3.0] - 28 de novembro de 2023 a 22 de dezembro de 2023
+
+**Contexto:**: Estudo de métodos de raciocínio automático e de
+arquitectura de agentes deliberativos
+
+**Objetivo:** Implementação de um agente deliberativo com
+planeamento com base no algoritmo Frente-de-Onda
+
+## [v3.1] - 28 de novembro de 2023
+
+Modelo do mundo, Frente de onda
 
 ## Bibliografia
 

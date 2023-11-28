@@ -3,7 +3,7 @@ name = "iasc46307"
 version = "1.2"
 description = "Projeto Incremental | Inteligência Artificial e Sistemas Cognitivos | Semestre de Inverno 2023/2024"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 authors = [
   {name = "Diogo Ribeiro", email = "46307@alunos.isel.ipl.pt"},
 ]

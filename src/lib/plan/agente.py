@@ -16,9 +16,7 @@ class AgenteDelib:
     com base em estados não diretamente observáveis.
 
     NÃO inclui estratégias de reconsideração, que podem alterar crenças não associadas
-    ao objetivo atual:
-        base (cautelosa, arrojada), intermédias,
-        adaptativas (meta-raciocínio, aprendizagem);
+    ao objetivo atual.
     """
 
     def executar(self):
@@ -106,12 +104,14 @@ class AgenteFrenteOnda(AgenteDelib):
 
     def _deliberar(self):
         """
-        Que estados o agente pretende atingir?
+        Que estados o agente pretende atingir? (no modelo do mundo)
         """
         return self.__modelo.obter_posicoes_alvo()
 
     def _planear(self, objetivos):
-        """ """
+        """
+        Utiliza o planeador para gerar um plano de ação
+        """
         return self.__planeador.planear(objetivos)
 
     def _executar_plano(self, plano):

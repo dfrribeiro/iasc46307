@@ -191,11 +191,9 @@ Modelo do mundo, Frente de onda
 
 Implementação do modelo do mundo 2D
 
-...
-
 ## [v3.3] - 15 de dezembro de 2023
 
-...
+Implementação do agente deliberativo
 
 ## Bibliografia
 

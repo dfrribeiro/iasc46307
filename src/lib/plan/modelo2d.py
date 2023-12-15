@@ -16,7 +16,11 @@ class ModeloMundo2D(ModeloMundo):
     __ALVO = "+"
     __OBSTACULO = "#"
     # As constantes de elementos no ambiente são redefinidos aqui porque não existe
-    # dependência entre modelo do mundo e a "realidade" do ambiente.
+    # dependência entre modelo do mundo e a "realidade" do ambiente:
+    # o modelo do mundo é uma abstração do ambiente.
+    #
+    # Quem implementa o modelo do mundo é que sabe como interpretar os elementos
+    # do ambiente.
 
     def __init__(self):
         self.__estados = None

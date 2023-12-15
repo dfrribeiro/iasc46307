@@ -1,11 +1,12 @@
 class FrenteOnda:
     """
     Classe que implementa o algoritmo de Frente de Onda.
-    O algoritmo de Frente de Onda é um algoritmo de busca em largura que
-    determina a distância de cada estado para um conjunto de estados
-    objetivo. O valor é propagado de forma iterativa para os estados
-    adjacentes, resultando num gradiente de valores que representa a
-    distância de cada estado para os estados objetivo.
+
+    O algoritmo de Frente de Onda é um algoritmo de procura em espaço
+    de estados em largura que determina a distância de cada estado para
+    um conjunto de estados objetivo. O valor é propagado de forma iterativa
+    para os estados adjacentes, resultando num gradiente de valores que representa
+    a distância de cada estado para os estados objetivo.
     """
 
     def __init__(self, gamma, valor_max):

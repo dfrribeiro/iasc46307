@@ -76,7 +76,7 @@ class ModeloMundo2D(ModeloMundo):
         self.__xmax = len(percepcao[0])
 
         # Garantir que todas as linhas têm o mesmo tamanho
-        assert all(len(linha) == self.x_max for linha in percepcao)
+        assert all(len(linha) == self.__xmax for linha in percepcao)
 
         # Alternativamente:
         # self.__xmax = max(len(linha) for linha in percepcao)
@@ -84,8 +84,8 @@ class ModeloMundo2D(ModeloMundo):
         # Filtra os estados válidos de entre de todas as posições do ambiente
         self.__estados = [
             Estado(x, y)
-            for y in range(self.y_max)
-            for x in range(self.x_max)
+            for y in range(self.__ymax)
+            for x in range(self.__xmax)
             if percepcao[y][x] != self.__OBSTACULO
         ]
 
@@ -94,7 +94,9 @@ class ModeloMundo2D(ModeloMundo):
         Retorna uma lista com as posições (x, y) dos alvos.
         """
         return [
-            (x, y) for (x, y) in self.__estados if self.__elementos[y][x] == self.__ALVO
+            Estado(x, y)
+            for (x, y) in self.__estados
+            if self.__elementos[y][x] == self.__ALVO
         ]
 
     def __simular_acao(self, estado, acao):

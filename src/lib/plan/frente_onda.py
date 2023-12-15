@@ -59,26 +59,3 @@ class FrenteOnda:
             ):
                 adjacentes.append(prox_estado)
         return adjacentes
-
-
-class PlaneadorFrenteOnda:
-    def __init__(self, modelo, gamma=0.98, valor_max=1):
-        self.__modelo = modelo
-        self.__frente_onda = FrenteOnda(gamma, valor_max)
-        # self.__V = {}  # Estado, valor
-
-    @property
-    def V(self):
-        pass
-
-    def planear(self, objetivos):
-        """
-        Cria o plano
-        """
-        pass
-
-    def __valor_acao(self, estado, acao):
-        """
-        Retorna o valor
-        """
-        pass

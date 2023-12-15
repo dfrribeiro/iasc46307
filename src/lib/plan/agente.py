@@ -1,3 +1,4 @@
+import time
 from lib.plan.modelo2d import ModeloMundo2D
 from lib.plan.planeador import PlaneadorFrenteOnda
 from mod.ambiente.defamb import DEF_AMB
@@ -118,6 +119,12 @@ class AgenteFrenteOnda(AgenteDelib):
         """
         Visualiza o plano (não mexe o agente)
         """
+        now = time.strftime("%Y%m%d-%H%M%S")
+
         self.__visualizador.mostrar(
-            self.__modelo.xmax, self.__modelo.ymax, self.__planeador.V, plano
+            self.__modelo.xmax,
+            self.__modelo.ymax,
+            self.__planeador.V,
+            plano,
+            nome_ficheiro=f"out/plan_{self.__num_ambiente}_{now}.png",
         )

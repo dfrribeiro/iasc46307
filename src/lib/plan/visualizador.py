@@ -7,7 +7,7 @@ class VisValorPol:
     Classe que implementa um visualizador de valor e política.
     """
 
-    def mostrar(self, x_max, y_max, V, politica):
+    def mostrar(self, x_max, y_max, V, politica, nome_ficheiro="valor_politica.png"):
         """
         Mostra os valores da política.
         """
@@ -41,5 +41,7 @@ class VisValorPol:
 
         # Política (setas)
         grafico.quiver(X, Y, DX, DY, scale_units="xy", scale=2)
+
+        plt.savefig(nome_ficheiro)
 
         plt.show()

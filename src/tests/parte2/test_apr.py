@@ -20,7 +20,7 @@ def definir_agente(config):
     Altera a configuração por omissão do agente com base na configuração dada,
     de forma a produzir uma configuração completa.
     """
-    base = DEFAULT_CONFIG
+    base = dict(DEFAULT_CONFIG)
     base.update(config)
     return base
 

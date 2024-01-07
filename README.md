@@ -65,7 +65,7 @@ git archive --format zip --output ../iasc46307.zip master
 Por exemplo, para executar o programa da parte 1.1:
 
 ```shell
-python ./src/tests/parte1_1/xor.py
+python ./src/tests/parte1_1/test_xor.py
 ```
 
 ## Histórico de Versões
